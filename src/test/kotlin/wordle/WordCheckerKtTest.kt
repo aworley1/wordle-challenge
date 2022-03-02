@@ -35,10 +35,24 @@ internal class WordCheckerKtTest {
     }
 
     @Test
-    fun `should make repeated guess letter yellow for any guesses that are up to the number of original letters`() {
+    fun `should make repeated guess letter yellow for any guesses that are equal to the number of original letters`() {
         val result = checkWord("aabbb", "cccaa")
 
         assertThat(result).containsExactly("YELLOW", "YELLOW", "GREY", "GREY", "GREY")
+    }
+
+    @Test
+    fun `should make repeated guess letter yellow for any guesses that are up to the number of original letters`() {
+        val result = checkWord("abbbb", "cccaa")
+
+        assertThat(result).containsExactly("YELLOW", "GREY", "GREY", "GREY", "GREY")
+    }
+
+    @Test
+    fun `should not mark any repeated letters yellow if they have already been used for a successful guess`() {
+        val result = checkWord("aabba", "cccaa")
+
+        assertThat(result).containsExactly("YELLOW", "GREY", "GREY", "GREY", "GREEN")
     }
 
     @Test
