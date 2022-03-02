@@ -56,6 +56,13 @@ internal class WordCheckerKtTest {
     }
 
     @Test
+    fun `should only use up guesses for letters in correct position once`() {
+        val result = checkWord("eebbb", "ebbbe")
+
+        assertThat(result).containsExactly("GREEN", "YELLOW", "GREEN", "GREEN", "YELLOW")
+    }
+
+    @Test
     fun `should meet examples`() {
         assertThat(checkWord("eerie", "piece")).containsExactly("YELLOW", "GREY", "GREY", "YELLOW", "GREEN")
         assertThat(checkWord("about", "piece")).containsExactly("GREY", "GREY", "GREY", "GREY", "GREY")

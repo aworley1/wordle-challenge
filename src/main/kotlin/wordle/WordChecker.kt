@@ -12,10 +12,10 @@ fun checkWord(guess: String, answer: String): List<String> {
                 Pair(guessChar, false)
             }
         }.map { (guessChar, isCorrectCharInCorrectPosition) ->
-            val isCorrectCharInWrongPosition = remainingToGuess.remove(guessChar)
+            fun checkCorrectCharInWrongPositionAndUseUpGuess() = remainingToGuess.remove(guessChar)
             when {
                 isCorrectCharInCorrectPosition -> "GREEN"
-                isCorrectCharInWrongPosition -> "YELLOW"
+                checkCorrectCharInWrongPositionAndUseUpGuess() -> "YELLOW"
                 else -> "GREY"
             }
         }
